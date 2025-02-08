@@ -6,21 +6,22 @@
 ] @punctuation.bracket
 
 [
-  (escaped_characters)
+  (escaped_character)
   (start_assertion)
   (end_assertion)
 ] @escape
 
 [
-  "*"
-  "+"
-  "?"
+  (zero_or_more)
+  (one_or_more)
+  (lazy)
+  (optional)
 ] @operator
 
 (character_class
   [
     "^" @operator
-    (class_range
+    (character_set
       "-" @operator)
   ])
 
