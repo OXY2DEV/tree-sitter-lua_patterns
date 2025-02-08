@@ -10,9 +10,17 @@
 module.exports = grammar({
   name: "lua_pattern",
 
+  // TODO: Check if this is
+  // necessary.
   extras: _ => [/\r?\n/],
 
   rules: {
+    // (source_file) can contain,
+    // - Literal characters(e.g. A, B, C).
+    // - Character classes(e.g. %s, [a-z]).
+    // - Escaped characters(e.g. %%).
+    // - Capture groups(e.g. (.+)).
+    // - . (Any character)
     source_file: $ => repeat(
       choice(
         $.literal_character,
@@ -20,14 +28,35 @@ module.exports = grammar({
         $.escaped_character,
         $.capture_group,
         $.any_character
-        //$.extras
       ),
     ),
 
+
+    // Symbol to start matching
+    // from the start.
+    // E.g. ^Nvim
+    start_assertion: _ => "^",
+    // Symbol to start matching
+    // to the end.
+    // E.g. %d+$
+    end_assertion: _ => "$",
+
+
+    // Zero or more repeats, .*
     zero_or_more: _ => /\*/,
+    // One or more repeats, .+
     one_or_more: _ => /\+/,
+    // Zero or one repeat, .?
     optional: _ => /\?/,
 
+
+    // Any non magic character,
+    // Magic: ( ) . % + - * ? [ ] ^ $
+    // 
+    // TODO, Check if ] should be magic.
+    // 
+    // They should *optionally* support
+    // quantifiers.
     literal_character: $ => seq(
       /[^\^\$\+\*\-\?\(\)\[\]\.]/,
       optional(
@@ -39,6 +68,69 @@ module.exports = grammar({
         )
       )
     ),
+
+    // Normal characters inside a (character_class).
+    class_character: _ => /[^\%\-%]/,
+
+    // . + (optional) quantifiers.
+    any_character: $ => seq(
+      ".",
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+
+          $.optional
+        )
+      )
+    ),
+
+    // Predefined character classes. See the table in
+    // https://www.lua.org/pil/20.2.html
+    predefined_class: $ => seq(
+      "%",
+      /[acdlpsuwxzACDLPSUWXZ]/,
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+
+          $.optional
+        )
+      )
+    ),
+
+    // Character set, 0-9
+    character_set: $ => seq(
+      $.class_character,
+      "-",
+      $.class_character,
+    ),
+    escaped_character: $ => seq(
+      "%",
+      /[^acdlpsuwxzACDLPSUWXZ]/,
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+
+          $.optional
+        )
+      )
+    ),
+
+
+    // Character class. Either,
+    // - %s
+    // - [0-9], This can contain,
+    //   - Character sets, 0-9.
+    //   - Predefined class, %d.
+    //   - Normal character.
+    //   - Escapes, %%.
+    //   - Non-magic characters.
+    //
+    // They should *optionally* support
+    // quantifiers.
     character_class: $ => choice(
       $.predefined_class,
       seq(
@@ -46,7 +138,7 @@ module.exports = grammar({
         optional("^"),
         repeat1(
           choice(
-            $.ranged_class,
+            $.character_set,
             $.predefined_class,
             $.class_character,
             $.escaped_character,
@@ -64,6 +156,9 @@ module.exports = grammar({
         )
       )
     ),
+
+    // Capture group, e.g. (Hl%_[0-9]*)
+    // @see `character_class`
     capture_group: $ => seq(
       "(",
       repeat1(
@@ -75,41 +170,6 @@ module.exports = grammar({
         )
       ),
       ")"
-    ),
-
-    class_character: _ => /[^\%\-%]/,
-    any_character: $ => seq(
-      ".",
-      optional(
-        choice(
-          $.zero_or_more,
-          $.one_or_more,
-
-          $.optional
-        )
-      )
-    ),
-
-    predefined_class: $ => seq(
-      "%",
-      /[acdlpsuwxzACDLPSUWXZ]/,
-      optional(
-        choice(
-          $.zero_or_more,
-          $.one_or_more,
-
-          $.optional
-        )
-      )
-    ),
-    ranged_class: $ => seq(
-      $.class_character,
-      "-",
-      $.class_character,
-    ),
-    escaped_character: _ => seq(
-      "%",
-      /[^acdlpsuwxzACDLPSUWXZ]/
     ),
   }
 });
