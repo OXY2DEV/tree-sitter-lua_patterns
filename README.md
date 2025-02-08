@@ -9,7 +9,7 @@
 
 Lua patterns grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
-[ci]: https://img.shields.io/github/actions/workflow/status/tree-sitter/tree-sitter-lua_patterns/ci.yml?logo=github&label=CI
+[ci]: https://img.shields.io/github/actions/workflow/status/OXY2DEV/tree-sitter-lua_patterns/ci.yml?logo=github&label=CI
 [discord]: https://img.shields.io/discord/1063097320771698699?logo=discord&label=discord
 [matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
 <!--[npm]: https://img.shields.io/npm/v/tree-sitter-lua_patterns?logo=npm-->
