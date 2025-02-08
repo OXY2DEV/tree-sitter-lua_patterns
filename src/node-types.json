@@ -62,6 +62,10 @@
           "named": true
         },
         {
+          "type": "character_set",
+          "named": true
+        },
+        {
           "type": "class_character",
           "named": true
         },
@@ -82,11 +86,22 @@
           "named": true
         },
         {
-          "type": "ranged_class",
-          "named": true
-        },
-        {
           "type": "zero_or_more",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "character_set",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "class_character",
           "named": true
         }
       ]
@@ -95,7 +110,25 @@
   {
     "type": "escaped_character",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "one_or_more",
+          "named": true
+        },
+        {
+          "type": "optional",
+          "named": true
+        },
+        {
+          "type": "zero_or_more",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "literal_character",
@@ -138,21 +171,6 @@
         },
         {
           "type": "zero_or_more",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ranged_class",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "class_character",
           "named": true
         }
       ]
