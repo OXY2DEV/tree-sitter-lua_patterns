@@ -1,0 +1,124 @@
+==============================================================================
+Sequence match
+==============================================================================
+Hello
+------------------------------------------------------------------------------
+
+(source_file
+  (literal_character)
+  (literal_character)
+  (literal_character)
+  (literal_character)
+  (literal_character))
+
+==============================================================================
+Sequence match with `.`
+==============================================================================
+He..o
+------------------------------------------------------------------------------
+
+(source_file
+  (literal_character)
+  (literal_character)
+  (any_character)
+  (any_character)
+  (literal_character))
+
+==============================================================================
+Quantifiers
+==============================================================================
+H?e*l+.?
+------------------------------------------------------------------------------
+
+(source_file
+  (literal_character
+    (optional))
+  (literal_character
+    (zero_or_more))
+  (literal_character
+    (one_or_more))
+  (any_character
+    (optional)))
+
+==============================================================================
+Line start & end
+==============================================================================
+^he..o$
+------------------------------------------------------------------------------
+
+(source_file
+  (start_assertion)
+  (literal_character)
+  (literal_character)
+  (any_character)
+  (any_character)
+  (literal_character)
+  (end_assertion))
+
+==============================================================================
+Character class
+==============================================================================
+[A-Za-z][^Xx]
+------------------------------------------------------------------------------
+
+(source_file
+  (character_class
+    (character_set
+      (class_character)
+      (class_character))
+    (character_set
+      (class_character)
+      (class_character)))
+  (character_class
+    (class_character)
+    (class_character)))
+
+==============================================================================
+Character class- Escaped character
+==============================================================================
+[%-%.]
+------------------------------------------------------------------------------
+
+(source_file
+  (character_class
+    (escaped_character)
+    (escaped_character)))
+
+==============================================================================
+Capture groups
+==============================================================================
+Hello (.*)
+------------------------------------------------------------------------------
+
+(source_file
+  (literal_character)
+  (literal_character)
+  (literal_character)
+  (literal_character)
+  (literal_character)
+  (literal_character)
+  (capture_group
+    (any_character
+      (zero_or_more))))
+
+==============================================================================
+Simple markdown email parser
+==============================================================================
+%<([^%s%@]-)@(%S+)%>
+------------------------------------------------------------------------------
+
+(source_file
+  (escaped_character)
+  (capture_group
+    (character_class
+      (predefined_class)
+      (escaped_character)
+      (lazy)))
+  (literal_character)
+  (capture_group
+    (character_class
+      (predefined_class
+        (one_or_more))))
+  (escaped_character))
+
+
