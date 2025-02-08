@@ -8,6 +8,10 @@
       "required": false,
       "types": [
         {
+          "type": "lazy",
+          "named": true
+        },
+        {
           "type": "one_or_more",
           "named": true
         },
@@ -74,6 +78,10 @@
           "named": true
         },
         {
+          "type": "lazy",
+          "named": true
+        },
+        {
           "type": "one_or_more",
           "named": true
         },
@@ -116,6 +124,10 @@
       "required": false,
       "types": [
         {
+          "type": "lazy",
+          "named": true
+        },
+        {
           "type": "one_or_more",
           "named": true
         },
@@ -139,6 +151,10 @@
       "required": false,
       "types": [
         {
+          "type": "lazy",
+          "named": true
+        },
+        {
           "type": "one_or_more",
           "named": true
         },
@@ -161,6 +177,10 @@
       "multiple": false,
       "required": false,
       "types": [
+        {
+          "type": "lazy",
+          "named": true
+        },
         {
           "type": "one_or_more",
           "named": true
@@ -198,15 +218,28 @@
           "named": true
         },
         {
+          "type": "end_assertion",
+          "named": true
+        },
+        {
           "type": "escaped_character",
           "named": true
         },
         {
           "type": "literal_character",
           "named": true
+        },
+        {
+          "type": "start_assertion",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "start_assertion",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "%",
@@ -242,6 +275,14 @@
   },
   {
     "type": "class_character",
+    "named": true
+  },
+  {
+    "type": "end_assertion",
+    "named": true
+  },
+  {
+    "type": "lazy",
     "named": true
   },
   {

@@ -23,6 +23,8 @@ module.exports = grammar({
     // - . (Any character)
     source_file: $ => repeat(
       choice(
+        $.start_assertion,
+        $.end_assertion,
         $.literal_character,
         $.character_class,
         $.escaped_character,
@@ -46,6 +48,8 @@ module.exports = grammar({
     zero_or_more: _ => /\*/,
     // One or more repeats, .+
     one_or_more: _ => /\+/,
+    // Non-greedy repeats, .-
+    lazy: _ => /-/,
     // Zero or one repeat, .?
     optional: _ => /\?/,
 
@@ -63,6 +67,7 @@ module.exports = grammar({
         choice(
           $.zero_or_more,
           $.one_or_more,
+          $.lazy,
 
           $.optional
         )
@@ -79,6 +84,7 @@ module.exports = grammar({
         choice(
           $.zero_or_more,
           $.one_or_more,
+          $.lazy,
 
           $.optional
         )
@@ -94,6 +100,7 @@ module.exports = grammar({
         choice(
           $.zero_or_more,
           $.one_or_more,
+          $.lazy,
 
           $.optional
         )
@@ -113,6 +120,7 @@ module.exports = grammar({
         choice(
           $.zero_or_more,
           $.one_or_more,
+          $.lazy,
 
           $.optional
         )
@@ -150,6 +158,7 @@ module.exports = grammar({
           choice(
             $.zero_or_more,
             $.one_or_more,
+            $.lazy,
 
             $.optional
           )
