@@ -9,6 +9,9 @@
 
 Lua patterns grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
+>[!NOTE]
+> There's already a parser for this named `luap` which I didn't see. So, this is archived.
+
 [ci]: https://img.shields.io/github/actions/workflow/status/OXY2DEV/tree-sitter-lua_patterns/ci.yml?logo=github&label=CI
 [discord]: https://img.shields.io/discord/1063097320771698699?logo=discord&label=discord
 [matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
