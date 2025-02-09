@@ -1,6 +1,6 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
-  "name": "lua_pattern",
+  "name": "lua_patterns",
   "rules": {
     "source_file": {
       "type": "REPEAT",

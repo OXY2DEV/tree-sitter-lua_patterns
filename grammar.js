@@ -8,7 +8,7 @@
 // @ts-check
 
 module.exports = grammar({
-  name: "lua_pattern",
+  name: "lua_patterns",
 
   // TODO: Check if this is
   // necessary.
