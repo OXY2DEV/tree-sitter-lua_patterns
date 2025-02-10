@@ -21,7 +21,7 @@ module.exports = grammar({
     // - Escaped characters(e.g. %%).
     // - Capture groups(e.g. (.+)).
     // - . (Any character)
-    source_file: $ => seq(
+    pattern: $ => seq(
       optional($.start_assertion),
       repeat(
         choice(

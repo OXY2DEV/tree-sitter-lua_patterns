@@ -170,34 +170,7 @@
     }
   },
   {
-    "type": "predefined_class",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "lazy",
-          "named": true
-        },
-        {
-          "type": "one_or_more",
-          "named": true
-        },
-        {
-          "type": "optional",
-          "named": true
-        },
-        {
-          "type": "zero_or_more",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "source_file",
+    "type": "pattern",
     "named": true,
     "root": true,
     "fields": {},
@@ -231,6 +204,33 @@
         },
         {
           "type": "start_assertion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "predefined_class",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lazy",
+          "named": true
+        },
+        {
+          "type": "one_or_more",
+          "named": true
+        },
+        {
+          "type": "optional",
+          "named": true
+        },
+        {
+          "type": "zero_or_more",
           "named": true
         }
       ]
