@@ -4,7 +4,7 @@ Sequence match
 Hello
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (literal_character)
   (literal_character)
   (literal_character)
@@ -17,7 +17,7 @@ Sequence match with `.`
 He..o
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (literal_character)
   (literal_character)
   (any_character)
@@ -30,7 +30,7 @@ Quantifiers
 H?e*l+.?
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (literal_character
     (optional))
   (literal_character
@@ -46,7 +46,7 @@ Line start & end
 ^he..o$
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (start_assertion)
   (literal_character)
   (literal_character)
@@ -61,7 +61,7 @@ Character class
 [A-Za-z][^Xx]
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (character_class
     (character_set
       (class_character)
@@ -79,7 +79,7 @@ Character class- Escaped character
 [%-%.]
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (character_class
     (escaped_character)
     (escaped_character)))
@@ -90,7 +90,7 @@ Capture groups
 Hello (.*)
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (literal_character)
   (literal_character)
   (literal_character)
@@ -107,7 +107,7 @@ Simple markdown email parser
 %<([^%s%@]-)@(%S+)%>
 ------------------------------------------------------------------------------
 
-(source_file
+(pattern
   (escaped_character)
   (capture_group
     (character_class

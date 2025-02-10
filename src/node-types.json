@@ -47,7 +47,7 @@
           "named": true
         },
         {
-          "type": "literal_characters",
+          "type": "literal_character",
           "named": true
         }
       ]
@@ -143,7 +143,7 @@
     }
   },
   {
-    "type": "literal_characters",
+    "type": "literal_character",
     "named": true,
     "fields": {},
     "children": {
@@ -199,7 +199,7 @@
           "named": true
         },
         {
-          "type": "literal_characters",
+          "type": "literal_character",
           "named": true
         },
         {

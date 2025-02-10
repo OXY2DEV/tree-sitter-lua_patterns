@@ -24,7 +24,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "literal_characters"
+                "name": "literal_character"
               },
               {
                 "type": "SYMBOL",
@@ -83,12 +83,12 @@
       "type": "PATTERN",
       "value": "\\?"
     },
-    "literal_characters": {
+    "literal_character": {
       "type": "SEQ",
       "members": [
         {
           "type": "PATTERN",
-          "value": "[^\\^\\$\\+\\*\\-\\?\\(\\)\\[\\]\\.]+"
+          "value": "[^\\^\\$\\+\\*\\-\\?\\(\\)\\[\\]\\.]"
         },
         {
           "type": "CHOICE",
@@ -377,7 +377,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "literal_characters"
+                "name": "literal_character"
               },
               {
                 "type": "SYMBOL",
