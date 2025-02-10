@@ -21,16 +21,18 @@ module.exports = grammar({
     // - Escaped characters(e.g. %%).
     // - Capture groups(e.g. (.+)).
     // - . (Any character)
-    source_file: $ => repeat(
-      choice(
-        $.start_assertion,
-        $.end_assertion,
-        $.literal_character,
-        $.character_class,
-        $.escaped_character,
-        $.capture_group,
-        $.any_character
+    source_file: $ => seq(
+      optional($.start_assertion),
+      repeat(
+        choice(
+          $.literal_character,
+          $.character_class,
+          $.escaped_character,
+          $.capture_group,
+          $.any_character
+        ),
       ),
+      optional($.end_assertion),
     ),
 
 

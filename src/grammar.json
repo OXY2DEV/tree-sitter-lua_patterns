@@ -3,40 +3,61 @@
   "name": "lua_patterns",
   "rules": {
     "source_file": {
-      "type": "REPEAT",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "start_assertion"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "end_assertion"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "literal_character"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "character_class"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "escaped_character"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "capture_group"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "any_character"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "start_assertion"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "literal_character"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "character_class"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "escaped_character"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "capture_group"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "any_character"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "end_assertion"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "start_assertion": {
       "type": "STRING",
