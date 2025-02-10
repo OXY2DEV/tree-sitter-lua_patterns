@@ -25,7 +25,7 @@ module.exports = grammar({
       optional($.start_assertion),
       repeat(
         choice(
-          $.literal_character,
+          $.literal_characters,
           $.character_class,
           $.escaped_character,
           $.capture_group,
@@ -56,15 +56,15 @@ module.exports = grammar({
     optional: _ => /\?/,
 
 
-    // Any non magic character,
+    // One or more non magic character,
     // Magic: ( ) . % + - * ? [ ] ^ $
     // 
     // TODO, Check if ] should be magic.
     // 
     // They should *optionally* support
     // quantifiers.
-    literal_character: $ => seq(
-      /[^\^\$\+\*\-\?\(\)\[\]\.]/,
+    literal_characters: $ => seq(
+      /[^\^\$\+\*\-\?\(\)\[\]\.]+/,
       optional(
         choice(
           $.zero_or_more,
@@ -176,7 +176,7 @@ module.exports = grammar({
         choice(
           $.character_class,
           $.escaped_character,
-          $.literal_character,
+          $.literal_characters,
           $.any_character
         )
       ),
