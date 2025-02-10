@@ -29,4 +29,4 @@
   (class_character)
 ] @constant.character
 
-(literal_character) @string
+(literal_characters) @string
