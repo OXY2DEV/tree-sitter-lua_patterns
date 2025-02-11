@@ -25,6 +25,7 @@ module.exports = grammar({
       optional($.start_assertion),
       repeat(
         choice(
+          $.escape_sequence,
           $.literal_character,
           $.character_class,
           $.character_set,
@@ -126,7 +127,22 @@ module.exports = grammar({
       )
     ),
 
-    set_class: $ => seq(
+    escape_sequence: $ => seq(
+      /\\[bfntvr0'"\\]/,
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+          $.lazy,
+
+          $.optional
+        )
+      )
+    ),
+
+    set_sequence: _ => /\\[bfntvr0'"\\]/,
+
+    set_class: _ => seq(
       "%",
       /[acdlpsuwxzACDLPSUWXZ]/
     ),
@@ -141,6 +157,8 @@ module.exports = grammar({
     character_set_content: $ => repeat1(
       choice(
         $.character_range,
+
+        alias($.set_sequence, $.escape_sequence),
         alias($.set_class, $.character_class),
         alias($.set_character, $.literal_character),
         alias($.set_escaped, $.escaped_character),
@@ -182,6 +200,8 @@ module.exports = grammar({
       repeat1(
         choice(
           $.character_set,
+
+          alias($.set_sequence, $.escape_sequence),
           alias($.set_class, $.character_class),
           alias($.set_character, $.literal_character),
           alias($.set_escaped, $.escaped_character),

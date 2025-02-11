@@ -47,6 +47,10 @@
           "named": true
         },
         {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
           "type": "escaped_character",
           "named": true
         },
@@ -151,11 +155,42 @@
           "named": true
         },
         {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
           "type": "escaped_character",
           "named": true
         },
         {
           "type": "literal_character",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "escape_sequence",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lazy",
+          "named": true
+        },
+        {
+          "type": "one_or_more",
+          "named": true
+        },
+        {
+          "type": "optional",
+          "named": true
+        },
+        {
+          "type": "zero_or_more",
           "named": true
         }
       ]
@@ -242,6 +277,10 @@
         },
         {
           "type": "end_assertion",
+          "named": true
+        },
+        {
+          "type": "escape_sequence",
           "named": true
         },
         {

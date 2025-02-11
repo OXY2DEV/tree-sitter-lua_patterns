@@ -29,3 +29,6 @@
 
 (character_set_content
   (literal_character) @constant.character)
+
+(escape_sequence) @string.escape
+

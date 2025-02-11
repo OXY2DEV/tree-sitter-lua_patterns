@@ -24,6 +24,10 @@
             "members": [
               {
                 "type": "SYMBOL",
+                "name": "escape_sequence"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "literal_character"
               },
               {
@@ -274,6 +278,48 @@
         }
       ]
     },
+    "escape_sequence": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\\\[bfntvr0'\"\\\\]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "zero_or_more"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "one_or_more"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "lazy"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "optional"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "set_sequence": {
+      "type": "PATTERN",
+      "value": "\\\\[bfntvr0'\"\\\\]"
+    },
     "set_class": {
       "type": "SEQ",
       "members": [
@@ -316,6 +362,15 @@
           {
             "type": "SYMBOL",
             "name": "character_range"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "set_sequence"
+            },
+            "named": true,
+            "value": "escape_sequence"
           },
           {
             "type": "ALIAS",
@@ -429,6 +484,15 @@
               {
                 "type": "SYMBOL",
                 "name": "character_set"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "set_sequence"
+                },
+                "named": true,
+                "value": "escape_sequence"
               },
               {
                 "type": "ALIAS",
