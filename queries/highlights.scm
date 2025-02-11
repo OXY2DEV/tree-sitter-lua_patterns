@@ -18,15 +18,14 @@
   (optional)
 ] @operator
 
-(character_class
+(character_set
   [
     "^" @operator
-    (character_set
+    (character_range
       "-" @operator)
   ])
 
-[
-  (class_character)
-] @constant.character
-
 (literal_character) @string
+
+(character_set_content
+  (literal_character) @constant.character)

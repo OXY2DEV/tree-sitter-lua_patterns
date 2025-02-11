@@ -27,6 +27,7 @@ module.exports = grammar({
         choice(
           $.literal_character,
           $.character_class,
+          $.character_set,
           $.escaped_character,
           $.capture_group,
           $.any_character
@@ -74,9 +75,6 @@ module.exports = grammar({
       )
     ),
 
-    // Normal characters inside a (character_class).
-    class_character: _ => /[^\%\-%]/,
-
     // . + (optional) quantifiers.
     any_character: $ => seq(
       ".",
@@ -93,7 +91,7 @@ module.exports = grammar({
 
     // Predefined character classes. See the table in
     // https://www.lua.org/pil/20.2.html
-    predefined_class: $ => seq(
+    character_class: $ => seq(
       "%",
       /[acdlpsuwxzACDLPSUWXZ]/,
       optional(
@@ -108,11 +106,12 @@ module.exports = grammar({
     ),
 
     // Character set, 0-9
-    character_set: $ => seq(
-      $.class_character,
+    character_range: $ => seq(
+      alias($.set_character, $.literal_character),
       "-",
-      $.class_character,
+      alias($.set_character, $.literal_character),
     ),
+
     escaped_character: $ => seq(
       "%",
       /[^acdlpsuwxzACDLPSUWXZ]/,
@@ -127,11 +126,32 @@ module.exports = grammar({
       )
     ),
 
+    set_class: $ => seq(
+      "%",
+      /[acdlpsuwxzACDLPSUWXZ]/
+    ),
+    set_character: _ => /[^\^\$\+\*\-\?\(\)\[\]\.]/,
+    set_escaped: _ => seq(
+      "%",
+      /[^acdlpsuwxzACDLPSUWXZ]/
+    ),
+    set_any: _ => ".",
 
-    // Character class. Either,
+    // Text inside of [].
+    character_set_content: $ => repeat1(
+      choice(
+        $.character_range,
+        alias($.set_class, $.character_class),
+        alias($.set_character, $.literal_character),
+        alias($.set_escaped, $.escaped_character),
+        alias($.set_any, $.any_character)
+      )
+    ),
+
+    // Character set. Either,
     // - %s
-    // - [0-9], This can contain,
-    //   - Character sets, 0-9.
+    // - [0-9abc%s], This can contain,
+    //   - Character range, 0-9.
     //   - Predefined class, %d.
     //   - Normal character.
     //   - Escapes, %%.
@@ -139,43 +159,33 @@ module.exports = grammar({
     //
     // They should *optionally* support
     // quantifiers.
-    character_class: $ => choice(
-      $.predefined_class,
-      seq(
-        "[",
-        optional("^"),
-        repeat1(
-          choice(
-            $.character_set,
-            $.predefined_class,
-            $.class_character,
-            $.escaped_character,
-            $.any_character
-          )
-        ),
-        "]",
-        optional(
-          choice(
-            $.zero_or_more,
-            $.one_or_more,
-            $.lazy,
+    character_set: $ => seq(
+      "[",
+      optional("^"),
+      $.character_set_content,
+      "]",
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+          $.lazy,
 
-            $.optional
-          )
+          $.optional
         )
       )
     ),
 
     // Capture group, e.g. (Hl%_[0-9]*)
-    // @see `character_class`
+    // @see `character_set`
     capture_group: $ => seq(
       "(",
       repeat1(
         choice(
-          $.character_class,
-          $.escaped_character,
-          $.literal_character,
-          $.any_character
+          $.character_set,
+          alias($.set_class, $.character_class),
+          alias($.set_character, $.literal_character),
+          alias($.set_escaped, $.escaped_character),
+          alias($.set_any, $.any_character)
         )
       ),
       ")"
