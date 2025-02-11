@@ -9,7 +9,8 @@
   (escaped_character)
   (start_assertion)
   (end_assertion)
-] @escape
+  (escape_sequence)
+] @string.escape
 
 [
   (zero_or_more)
@@ -29,6 +30,4 @@
 
 (character_set_content
   (literal_character) @constant.character)
-
-(escape_sequence) @string.escape
 
