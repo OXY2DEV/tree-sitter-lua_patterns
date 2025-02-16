@@ -63,17 +63,20 @@ module.exports = grammar({
     // 
     // TODO: Find a way to properly parse
     // characters.
-    literal_character: $ => seq(
-      /[^\^\$\+\*\-\?\(\)\[\]\.]/,
-      optional(
-        choice(
-          $.zero_or_more,
-          $.one_or_more,
-          $.lazy,
+    literal_character: $ => choice(
+      seq(
+        /[^\^\$\+\*\-\?\(\)\[\]\.]/,
+        optional(
+          choice(
+            $.zero_or_more,
+            $.one_or_more,
+            $.lazy,
 
-          $.optional
+            $.optional
+          )
         )
-      )
+      ),
+      /[^\^\$\+\*\-\?\(\)\[\]\.]/,
     ),
 
     // . + (optional) quantifiers.

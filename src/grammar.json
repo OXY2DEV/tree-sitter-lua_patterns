@@ -92,40 +92,49 @@
       "value": "\\?"
     },
     "literal_character": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "[^\\^\\$\\+\\*\\-\\?\\(\\)\\[\\]\\.]"
-        },
-        {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\^\\$\\+\\*\\-\\?\\(\\)\\[\\]\\.]"
+            },
             {
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "zero_or_more"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "zero_or_more"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "one_or_more"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "lazy"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "optional"
+                    }
+                  ]
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "one_or_more"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "lazy"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "optional"
+                  "type": "BLANK"
                 }
               ]
-            },
-            {
-              "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\^\\$\\+\\*\\-\\?\\(\\)\\[\\]\\.]"
         }
       ]
     },
