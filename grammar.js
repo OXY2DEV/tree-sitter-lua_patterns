@@ -31,7 +31,18 @@ module.exports = grammar({
           $.character_set,
           $.escaped_character,
           $.capture_group,
-          $.any_character
+          $.any_character,
+
+          // Monkey-patch the issue
+          prec(-1, alias(
+            choice(
+              $.zero_or_more,
+              $.one_or_more,
+              $.lazy,
+
+              $.optional
+            ), $.ERROR
+          ))
         ),
       ),
       optional($.end_assertion),
@@ -63,24 +74,21 @@ module.exports = grammar({
     // 
     // TODO: Find a way to properly parse
     // characters.
-    literal_character: $ => choice(
-      seq(
-        /[^\^\$\+\*\-\?\(\)\[\]\.]/,
-        optional(
-          choice(
-            $.zero_or_more,
-            $.one_or_more,
-            $.lazy,
-
-            $.optional
-          )
-        )
-      ),
+    literal_character: $ => prec.right(seq(
       /[^\^\$\+\*\-\?\(\)\[\]\.]/,
-    ),
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+          $.lazy,
+
+          $.optional
+        )
+      )
+    )),
 
     // . + (optional) quantifiers.
-    any_character: $ => seq(
+    any_character: $ => prec.right(seq(
       ".",
       optional(
         choice(
@@ -91,11 +99,11 @@ module.exports = grammar({
           $.optional
         )
       )
-    ),
+    )),
 
     // Predefined character classes. See the table in
     // https://www.lua.org/pil/20.2.html
-    character_class: $ => seq(
+    character_class: $ => prec.right(seq(
       "%",
       /[acdlpsuwxzACDLPSUWXZ]/,
       optional(
@@ -107,7 +115,7 @@ module.exports = grammar({
           $.optional
         )
       )
-    ),
+    )),
 
     // Character set, 0-9
     character_range: $ => seq(
@@ -116,7 +124,7 @@ module.exports = grammar({
       alias($.set_character, $.literal_character),
     ),
 
-    escaped_character: $ => seq(
+    escaped_character: $ => prec.right(seq(
       "%",
       /[^acdlpsuwxzACDLPSUWXZ]/,
       optional(
@@ -128,9 +136,9 @@ module.exports = grammar({
           $.optional
         )
       )
-    ),
+    )),
 
-    escape_sequence: $ => seq(
+    escape_sequence: $ => prec.right(seq(
       /\\[bfntvr0'"\\]/,
       optional(
         choice(
@@ -141,7 +149,7 @@ module.exports = grammar({
           $.optional
         )
       )
-    ),
+    )),
 
     set_sequence: _ => /\\[bfntvr0'"\\]/,
 
@@ -180,7 +188,7 @@ module.exports = grammar({
     //
     // They should *optionally* support
     // quantifiers.
-    character_set: $ => seq(
+    character_set: $ => prec.right(seq(
       "[",
       optional("^"),
       $.character_set_content,
@@ -194,7 +202,7 @@ module.exports = grammar({
           $.optional
         )
       )
-    ),
+    )),
 
     // Capture group, e.g. (Hl%_[0-9]*)
     // @see `character_set`

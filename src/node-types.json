@@ -260,6 +260,10 @@
       "required": false,
       "types": [
         {
+          "type": "ERROR",
+          "named": true
+        },
+        {
           "type": "any_character",
           "named": true
         },
@@ -322,6 +326,10 @@
   {
     "type": ".",
     "named": false
+  },
+  {
+    "type": "ERROR",
+    "named": true
   },
   {
     "type": "[",
