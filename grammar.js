@@ -41,7 +41,7 @@ module.exports = grammar({
               $.lazy,
 
               $.optional
-            ), $.ERROR
+            ), $.literal_character
           ))
         ),
       ),
