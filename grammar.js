@@ -32,6 +32,10 @@ module.exports = grammar({
           $.escaped_character,
           $.capture_group,
           $.any_character,
+
+          // Ignore `[]` and `()`
+          prec(-1, /\[\]/),
+          prec(-1, /\(\)/)
         ),
       ),
       optional($.end_assertion),
@@ -152,7 +156,7 @@ module.exports = grammar({
     set_character: _ => /[^\^\$\+\*\-\?\(\)\[\]\.]/,
     set_escaped: _ => seq(
       "%",
-      /[^acdlpsuwxzACDLPSUWXZ]/
+      /[^acdlpsuwxzACDLPSUWXZ\[\]]/
     ),
     set_any: _ => ".",
 

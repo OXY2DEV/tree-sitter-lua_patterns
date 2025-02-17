@@ -49,6 +49,22 @@
               {
                 "type": "SYMBOL",
                 "name": "any_character"
+              },
+              {
+                "type": "PREC",
+                "value": -1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\[\\]"
+                }
+              },
+              {
+                "type": "PREC",
+                "value": -1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\(\\)"
+                }
               }
             ]
           }
@@ -350,7 +366,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^acdlpsuwxzACDLPSUWXZ]"
+          "value": "[^acdlpsuwxzACDLPSUWXZ\\[\\]]"
         }
       ]
     },
