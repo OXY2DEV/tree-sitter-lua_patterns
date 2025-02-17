@@ -43,6 +43,10 @@
           "named": true
         },
         {
+          "type": "character_reference",
+          "named": true
+        },
+        {
           "type": "character_set",
           "named": true
         },
@@ -97,7 +101,38 @@
       "required": true,
       "types": [
         {
+          "type": "character_reference",
+          "named": true
+        },
+        {
           "type": "literal_character",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "character_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lazy",
+          "named": true
+        },
+        {
+          "type": "one_or_more",
+          "named": true
+        },
+        {
+          "type": "optional",
+          "named": true
+        },
+        {
+          "type": "zero_or_more",
           "named": true
         }
       ]
@@ -152,6 +187,10 @@
         },
         {
           "type": "character_range",
+          "named": true
+        },
+        {
+          "type": "character_reference",
           "named": true
         },
         {
@@ -269,6 +308,10 @@
         },
         {
           "type": "character_class",
+          "named": true
+        },
+        {
+          "type": "character_reference",
           "named": true
         },
         {

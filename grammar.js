@@ -32,6 +32,8 @@ module.exports = grammar({
           $.escaped_character,
           $.capture_group,
           $.any_character,
+          $.character_reference,
+          alias($.literal_quantifers, $.literal_character),
 
           // Ignore `[]` and `()`
           prec(-1, /\[\]/),
@@ -71,7 +73,7 @@ module.exports = grammar({
     // Use precedence to reduce false
     // positives.
     literal_character: $ => prec(-1, seq(
-      /[^\(\[\.]/,
+      /[^\(\[\.\+\-\?\*]/,
       optional(
         choice(
           $.zero_or_more,
@@ -82,6 +84,19 @@ module.exports = grammar({
         )
       )
     )),
+
+    character_reference: $ => seq(
+      /\\x[a-fA-F0-9]{2}/,
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+          $.lazy,
+
+          $.optional
+        )
+      )
+    ),
 
     // . + (optional) quantifiers.
     any_character: $ => seq(
@@ -96,6 +111,19 @@ module.exports = grammar({
         )
       )
     ),
+
+    literal_quantifers: $ => prec(-2, seq(
+      /[\+\-\*\?]/,
+      optional(
+        choice(
+          $.zero_or_more,
+          $.one_or_more,
+          $.lazy,
+
+          $.optional,
+        )
+      )
+    )),
 
     // Predefined character classes. See the table in
     // https://www.lua.org/pil/20.2.html
@@ -114,11 +142,17 @@ module.exports = grammar({
     ),
 
     // Character set, 0-9
-    character_range: $ => seq(
-      alias($.set_character, $.literal_character),
+    character_range: $ => prec(5, seq(
+      choice(
+        $.character_reference,
+        alias($.set_character, $.literal_character),
+      ),
       "-",
-      alias($.set_character, $.literal_character),
-    ),
+      choice(
+        $.character_reference,
+        alias($.set_character, $.literal_character),
+      ),
+    )),
 
     escaped_character: $ => seq(
       "%",
@@ -153,7 +187,7 @@ module.exports = grammar({
       "%",
       /[acdlpsuwxzACDLPSUWXZ]/
     ),
-    set_character: _ => /[^\^\$\+\*\-\?\(\)\[\]\.]/,
+    set_character: _ => /[^\]]/,
     set_escaped: _ => seq(
       "%",
       /[^acdlpsuwxzACDLPSUWXZ\[\]]/
@@ -169,7 +203,9 @@ module.exports = grammar({
         alias($.set_class, $.character_class),
         alias($.set_character, $.literal_character),
         alias($.set_escaped, $.escaped_character),
-        alias($.set_any, $.any_character)
+        alias($.set_any, $.any_character),
+        $.character_reference,
+        alias($.literal_quantifers, $.literal_character),
       )
     ),
 
@@ -212,7 +248,9 @@ module.exports = grammar({
           alias($.set_class, $.character_class),
           alias($.set_character, $.literal_character),
           alias($.set_escaped, $.escaped_character),
-          alias($.set_any, $.any_character)
+          alias($.set_any, $.any_character),
+          $.character_reference,
+          alias($.literal_quantifers, $.literal_character),
         )
       ),
       ")"
