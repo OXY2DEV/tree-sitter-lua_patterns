@@ -631,52 +631,27 @@
             "members": [
               {
                 "type": "SYMBOL",
+                "name": "escape_sequence"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "literal_character"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "character_class"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "character_set"
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "set_sequence"
-                },
-                "named": true,
-                "value": "escape_sequence"
+                "type": "SYMBOL",
+                "name": "escaped_character"
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "set_class"
-                },
-                "named": true,
-                "value": "character_class"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "set_character"
-                },
-                "named": true,
-                "value": "literal_character"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "set_escaped"
-                },
-                "named": true,
-                "value": "escaped_character"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "set_any"
-                },
-                "named": true,
-                "value": "any_character"
+                "type": "SYMBOL",
+                "name": "any_character"
               },
               {
                 "type": "SYMBOL",
@@ -690,6 +665,14 @@
                 },
                 "named": true,
                 "value": "literal_character"
+              },
+              {
+                "type": "PREC",
+                "value": -1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\[\\]"
+                }
               }
             ]
           }

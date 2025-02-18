@@ -242,16 +242,18 @@ module.exports = grammar({
       "(",
       repeat1(
         choice(
+          $.escape_sequence,
+          $.literal_character,
+          $.character_class,
           $.character_set,
-
-          alias($.set_sequence, $.escape_sequence),
-          alias($.set_class, $.character_class),
-          alias($.set_character, $.literal_character),
-          alias($.set_escaped, $.escaped_character),
-          alias($.set_any, $.any_character),
+          $.escaped_character,
+          $.any_character,
           $.character_reference,
           alias($.literal_quantifers, $.literal_character),
-        )
+
+          // Ignore `[]`
+          prec(-1, /\[\]/),
+        ),
       ),
       ")"
     ),
