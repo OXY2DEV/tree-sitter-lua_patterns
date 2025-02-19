@@ -183,14 +183,11 @@ module.exports = grammar({
 
     set_sequence: _ => /\\[bfntvr0'"\\]/,
 
-    set_class: _ => seq(
-      "%",
-      /[acdlpsuwxzACDLPSUWXZ]/
-    ),
+    set_class: _ => /%[acdlpsuwxzACDLPSUWXZ]/,
     set_character: _ => /[^\]]/,
     set_escaped: _ => seq(
       "%",
-      /[^acdlpsuwxzACDLPSUWXZ\[\]]/
+      /[^acdlpsuwxzACDLPSUWXZ]/
     ),
     set_any: _ => ".",
 

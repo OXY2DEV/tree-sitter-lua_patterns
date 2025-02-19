@@ -456,17 +456,8 @@
       "value": "\\\\[bfntvr0'\"\\\\]"
     },
     "set_class": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "%"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[acdlpsuwxzACDLPSUWXZ]"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "%[acdlpsuwxzACDLPSUWXZ]"
     },
     "set_character": {
       "type": "PATTERN",
@@ -481,7 +472,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^acdlpsuwxzACDLPSUWXZ\\[\\]]"
+          "value": "[^acdlpsuwxzACDLPSUWXZ]"
         }
       ]
     },
