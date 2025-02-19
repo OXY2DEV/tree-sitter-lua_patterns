@@ -19,14 +19,16 @@ First clone this repository to your machine. I cloned it to `~/.config/nvim/pars
 Now, put this in your `nvim-treesitter` config,
 
 ```lua
-local parser_configs = require("nvim-treesitter.config").get_parser_configs();
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs();
 
 parser_configs.lua_patterns = {
     install_info = {
-        url = "~/.config/nvim/parsers/nvim-treesitter-lua_patterns",
-        files = { "src/parser.c" }
+        url = "https://github.com/OXY2DEV/tree-sitter-lua_patterns",
+          files = { "src/parser.c" },
+          branch = "main",
+        },
     }
-};
+}
 ```
 
 Now, quit & open Neovim and run this command,
