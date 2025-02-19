@@ -14,8 +14,6 @@ Lua patterns grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitte
 
 ### 💡 nvim-treesitter
 
-First clone this repository to your machine. I cloned it to `~/.config/nvim/parsers/nvim-treesitter-lua_patterns`.
-
 Now, put this in your `nvim-treesitter` config,
 
 ```lua
@@ -39,11 +37,13 @@ Now, quit & open Neovim and run this command,
 
 ### 💡 manual
 
-Clone this repository repository to your machine.
-
-Now, copy the `lua_patterns.so` file to `~/.config/nvim/parser/`.
+Copy the `lua_patterns.so` file to `~/.config/nvim/parser/`.
 
 ## 💥 Syntax highlighting
+
+First clone this repository to your machine. I cloned it to `~/.config/nvim/parsers/nvim-treesitter-lua_patterns`.
+
+> Or just copy the `highlights.scm` file to `~/.config/nvim/queries/lua_patterns/highlights.scm`.
 
 To get syntax highlighting you need to copy the `queries/highlights.scm` to `~/.config/nvim/queries/lua_patterns/`.
 
