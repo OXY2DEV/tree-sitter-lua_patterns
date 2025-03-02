@@ -56,33 +56,36 @@ Line start & end
   (end_assertion))
 
 ==============================================================================
-Character class
+Character sets
 ==============================================================================
 [A-Za-z][^Xx]
 ------------------------------------------------------------------------------
 
 (pattern
-  (character_class
-    (character_set
-      (class_character)
-      (class_character))
-    (character_set
-      (class_character)
-      (class_character)))
-  (character_class
-    (class_character)
-    (class_character)))
+  (character_set
+    (character_set_content
+      (character_range
+        (literal_character)
+        (literal_character))
+      (character_range
+        (literal_character)
+        (literal_character))))
+  (character_set
+    (character_set_content
+      (literal_character)
+      (literal_character))))
 
 ==============================================================================
-Character class- Escaped character
+Character class with escaped characters
 ==============================================================================
 [%-%.]
 ------------------------------------------------------------------------------
 
 (pattern
-  (character_class
-    (escaped_character)
-    (escaped_character)))
+  (character_set
+    (character_set_content
+      (escaped_character)
+      (escaped_character))))
 
 ==============================================================================
 Capture groups
@@ -110,15 +113,15 @@ Simple markdown email parser
 (pattern
   (escaped_character)
   (capture_group
-    (character_class
-      (predefined_class)
-      (escaped_character)
+    (character_set
+      (character_set_content
+        (character_class)
+        (escaped_character))
       (lazy)))
   (literal_character)
   (capture_group
     (character_class
-      (predefined_class
-        (one_or_more))))
+      (one_or_more)))
   (escaped_character))
 
 
