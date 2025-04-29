@@ -22,7 +22,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/OXY2DEV/tree-sitter-lua_patterns.git"
+      "repository": "https://github.com/OXY2DEV/tree-sitter-lua_patterns"
     }
   },
   "bindings": {

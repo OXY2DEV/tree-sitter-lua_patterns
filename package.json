@@ -2,7 +2,7 @@
   "name": "tree-sitter-lua-patterns",
   "version": "0.1.0",
   "description": "Tree-sitter parser for Lua patterns",
-  "repository": "https://github.com/oxy2dev/tree-sitter-lua_patterns.git",
+  "repository": "https://github.com/oxy2dev/tree-sitter-lua_patterns",
   "license": "MIT",
   "author": {
     "name": "MD. Mouinul Hossain",

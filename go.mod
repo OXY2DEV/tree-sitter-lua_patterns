@@ -1,4 +1,4 @@
-module github.com/oxy2dev/tree-sitter-lua_patterns.git
+module github.com/oxy2dev/tree-sitter-lua_patterns
 
 go 1.22
 

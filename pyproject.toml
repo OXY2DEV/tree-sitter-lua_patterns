@@ -19,7 +19,7 @@ license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://github.com/oxy2dev/tree-sitter-lua_patterns.git"
+Homepage = "https://github.com/oxy2dev/tree-sitter-lua_patterns"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.22"]

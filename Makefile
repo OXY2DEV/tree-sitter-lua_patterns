@@ -3,7 +3,7 @@ $(error Windows is not supported)
 endif
 
 LANGUAGE_NAME := tree-sitter-lua_patterns
-HOMEPAGE_URL := https://github.com/oxy2dev/tree-sitter-lua_patterns.git
+HOMEPAGE_URL := https://github.com/oxy2dev/tree-sitter-lua_patterns
 VERSION := 0.1.0
 
 # repository

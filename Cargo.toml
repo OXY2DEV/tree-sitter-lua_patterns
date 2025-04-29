@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "lua-patterns"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/oxy2dev/tree-sitter-lua_patterns.git"
+repository = "https://github.com/oxy2dev/tree-sitter-lua_patterns"
 edition = "2021"
 autoexamples = false
 
