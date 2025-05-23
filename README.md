@@ -1,12 +1,12 @@
 # tree-sitter-lua_patterns
 
-[![CI][ci]](https://github.com/tree-sitter/tree-sitter-lua_patterns/actions/workflows/ci.yml)
+<!-- [![CI][ci]](https://github.com/tree-sitter/tree-sitter-lua_patterns/actions/workflows/ci.yml) -->
 [![discord][discord]](https://discord.gg/w7nTvsVJhm)
 [![matrix][matrix]](https://matrix.to/#/#tree-sitter-chat:matrix.org)
 
 Lua patterns grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
-[ci]: https://img.shields.io/github/actions/workflow/status/OXY2DEV/tree-sitter-lua_patterns/ci.yml?logo=github&label=CI
+<!-- [ci]: https://img.shields.io/github/actions/workflow/status/OXY2DEV/tree-sitter-lua_patterns/ci.yml?logo=github&label=CI -->
 [discord]: https://img.shields.io/discord/1063097320771698699?logo=discord&label=discord
 [matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
 
@@ -36,7 +36,13 @@ Now, quit & open Neovim and run this command,
 
 ### 💡 manual
 
-Copy the `lua_patterns.so` file to `~/.config/nvim/parser/`.
+1. Install the `tree-sitter` CLI tool.
+
+2. Clone the repository in your machine and `cd` into it.
+
+3. Run `tree-sitter build`(if it tells you to install dependencies then you should install them and retry).
+
+4. Copy the `lua_patterns.so` file to `~/.config/nvim/parser/`.
 
 ## 💥 Syntax highlighting
 
